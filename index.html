@@ -1,39 +1,184 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>fis by fouber</title>
 
-	<head>
-		<meta charset='utf-8' />
-		<meta name="description" content="fis : front-end integrated solution." />
-		<link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-		<title>fis</title>
-	</head>
-	
-	<body>
-		<!-- HEADER -->
-		<div id="header_wrap" class="outer">
-			<header class="inner">
-				<a id="forkme_banner" href="https://github.com/fouber/fis">View on GitHub</a>
-				<h1 id="project_title">F.I.S</h1>
-				<h2 id="project_tagline">front-end integrated solution.</h2>
-			</header>
-		</div>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-		<!-- MAIN CONTENT -->
-		<div id="main_content_wrap" class="outer">
-			<section id="main_content" class="inner">
-				<h1>Front End Integrated Solution.</h1>
-				<p><em>Unfinished until version 1.0.0</em></p>
-				<h2>Installation</h2>
-				<pre><code>$ npm install -g fis</code></pre>
-			</section>
-		</div>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>fis</h1>
+        <p>front-end integrated solution.</p>
+        <p class="view"><a href="https://github.com/fouber/fis">View the Project on GitHub <small>fouber/fis</small></a></p>
+        <ul>
+          <li><a href="https://github.com/fouber/fis/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/fouber/fis/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/fouber/fis">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>Front End Integrated Solution.</h1>
 
-		<!-- FOOTER  -->
-		<div id="footer_wrap" class="outer">
-			<footer class="inner">
-				<p class="copyright">fis maintained by <a href="https://github.com/fouber">fouber</a></p>
-				<p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-			</footer>
-		</div>
-	</body>
+<p><em>Unfinished until version 1.0.0</em></p>
+
+<h2>Quick start</h2>
+
+<pre><code># install fis
+$ npm install -g fis
+
+# start local server
+$ fis server start
+
+# install service
+$ fis server install pc2
+
+$ mkdir project
+
+$ cd project
+
+# install a pc2-demo project
+$ fis install pc2-demo
+
+# release your project to local server
+$ fis release --watch
+
+# browse http://localhost:8080/photo
+</code></pre>
+
+<h2>Commands</h2>
+
+<pre><code>Usage: fis &lt;command&gt;
+
+Commands:
+
+  release     build and deploy your project
+  server      launch a php-cgi server
+
+Options:
+
+  -h, --help     output usage information
+  -v, --version  output the version number
+
+See:
+    [fis-command-release](https://github.com/fouber/fis-command-release)
+    [fis-command-server](https://github.com/fouber/fis-command-server)
+</code></pre>
+
+<h2>Configure fis</h2>
+
+<pre><code># create fis config file
+$ vim path/to/project/fis-conf.js
+</code></pre>
+
+<div class="highlight"><pre><span class="nx">fis</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">merge</span><span class="p">({</span>    <span class="c1">//merge user settings</span>
+    <span class="c1">//using namespace, it can be omitted.</span>
+    <span class="nx">namespace</span> <span class="o">:</span> <span class="s1">'photo'</span><span class="p">,</span>
+    <span class="c1">//configure directory and release specification.</span>
+    <span class="nx">roadmap</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="nx">ext</span> <span class="o">:</span> <span class="p">{</span>
+            <span class="c1">//all the less files will be compiled into css files.</span>
+            <span class="nx">less</span> <span class="o">:</span> <span class="s1">'css'</span>
+        <span class="p">},</span>
+        <span class="nx">domain</span> <span class="o">:</span> <span class="p">{</span>
+            <span class="c1">//add domain to all js files.</span>
+            <span class="s1">'*.js'</span> <span class="o">:</span> <span class="s1">'http://img.baidu.com'</span>
+        <span class="p">},</span>
+        <span class="nx">path</span> <span class="o">:</span> <span class="p">[</span>    <span class="c1">//configure directory specification.</span>
+            <span class="p">{</span>
+                <span class="c1">//all the files in "/test/" directory</span>
+                <span class="nx">reg</span> <span class="o">:</span> <span class="sr">/^\/test\//i</span><span class="p">,</span>
+                <span class="c1">//will not be released</span>
+                <span class="nx">release</span> <span class="o">:</span> <span class="kc">false</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="c1">//all the js &amp; css files in "/widget/" directory</span>
+                <span class="nx">reg</span> <span class="o">:</span> <span class="sr">/^\/widget\/.*\.(js|css)$/i</span><span class="p">,</span>
+                <span class="c1">//is modular file</span>
+                <span class="nx">isMod</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="c1">//release to "path/to/output/static/photo/..."</span>
+                <span class="nx">release</span> <span class="o">:</span> <span class="s1">'/static/${namespace}$&amp;'</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="c1">//all the tpl files in "/widget/" directory</span>
+                <span class="nx">reg</span> <span class="o">:</span> <span class="sr">/^\/widget\/(.*\.tpl)$/i</span><span class="p">,</span>
+                <span class="c1">//is modular file</span>
+                <span class="nx">isMod</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="c1">//resource locator is "widget/photo/..."</span>
+                <span class="nx">url</span> <span class="o">:</span> <span class="s1">'widget/${namespace}/$1'</span><span class="p">,</span>
+                <span class="c1">//release to "path/to/output/template/widget/photo/..."</span>
+                <span class="nx">release</span> <span class="o">:</span> <span class="s1">'/template/widget/${namespace}/$1'</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="c1">//all the files in "/plugin/" directory</span>
+                <span class="c1">//will be released to "path/to/output/plugin/..."</span>
+                <span class="nx">reg</span> <span class="o">:</span> <span class="sr">/^\/plugin\//i</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="c1">//other tpl files</span>
+                <span class="nx">reg</span> <span class="o">:</span> <span class="sr">/^\/.+\.tpl$/i</span><span class="p">,</span>
+                <span class="c1">//release to "path/to/output/template/photo/..."</span>
+                <span class="nx">release</span> <span class="o">:</span> <span class="s1">'/template/${namespace}$&amp;'</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="c1">//photo-map.json</span>
+                <span class="nx">reg</span> <span class="o">:</span> <span class="sr">/^\/photo-map\.json$/i</span><span class="p">,</span>
+                <span class="c1">//release to "path/to/output/config/photo-map.json"</span>
+                <span class="nx">release</span> <span class="o">:</span> <span class="s1">'/config$&amp;'</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+                <span class="c1">//any other files</span>
+                <span class="nx">reg</span> <span class="o">:</span> <span class="sr">/^.*$/</span><span class="p">,</span>
+                <span class="c1">//release to "path/to/output/static/photo/..."</span>
+                <span class="nx">release</span> <span class="o">:</span> <span class="s1">'/static/${namespace}$&amp;'</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">},</span>
+    <span class="nx">deploy</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s1">'rd-test'</span> <span class="o">:</span> <span class="p">{</span> <span class="c1">//a deploy example</span>
+            <span class="c1">//remote receiver</span>
+            <span class="nx">receiver</span> <span class="o">:</span> <span class="s1">'http://zhangyunlong.fe.baidu.com/receiver.php'</span><span class="p">,</span>
+            <span class="c1">//post all the released files to the reciever</span>
+            <span class="c1">//and save them to "/home/zhangyunlong/public_html/"</span>
+            <span class="nx">to</span> <span class="o">:</span> <span class="s1">'/home/zhangyunlong/public_html/'</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">modules</span> <span class="o">:</span> <span class="p">{</span> <span class="c1">//using plugins</span>
+        <span class="nx">parser</span> <span class="o">:</span> <span class="p">{</span>
+            <span class="c1">//parse less file with "fis-parser-less" plugin</span>
+            <span class="c1">//fis-parser-less is not built-in</span>
+            <span class="c1">//install it by "npm install -g fis-parser-less"</span>
+            <span class="nx">less</span> <span class="o">:</span> <span class="s1">'less'</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="nx">settings</span> <span class="o">:</span> <span class="p">{</span> <span class="c1">//plugin settings</span>
+        <span class="nx">optimizer</span> <span class="o">:</span> <span class="p">{</span>
+            <span class="c1">//configure uglify-js plugin</span>
+            <span class="c1">//@see https://npmjs.org/package/uglify-js</span>
+            <span class="s1">'uglify-js'</span> <span class="o">:</span> <span class="p">{</span>
+                <span class="nx">booleans</span> <span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nx">if_return</span> <span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/fouber">fouber</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
 </html>
